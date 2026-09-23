@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div>
+      <h1><%= title %></h1>
+      <% if(usernames.length > 0) { %>
+        <ul>
+            <% usernames.forEach(user => { %>
+                <li><%= user.username %></li>
+            <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No usernames</p>
+      <% } %>
+      <a href="/new">Add Username</a>
+    </div>
+  </body>
+</html>
