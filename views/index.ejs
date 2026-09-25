@@ -10,6 +10,11 @@
     <div>
       <h1><%= title %></h1>
       <% if(usernames.length > 0) { %>
+        <form action="/" method="get">
+          <input type="search" name="search" />
+          <button type="submit">Search</button>
+        </form>
+        
         <ul>
             <% usernames.forEach(user => { %>
                 <li><%= user.username %></li>
@@ -19,6 +24,8 @@
         <p>No usernames</p>
       <% } %>
       <a href="/new">Add Username</a>
+      <a href="/">Get All Usernames</a>
+      <a href="/delete">Delete All Usernames</a>
     </div>
   </body>
 </html>

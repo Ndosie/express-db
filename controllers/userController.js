@@ -1,7 +1,14 @@
 const db = require("../db/queries");
 
 async function getUsernames(req, res) {
-  const usernames = await db.getAllUsernames();
+  let usernames = [];
+  const query = req.query.search;
+  if (query) {
+    usernames = await db.getSearchedNames(query);
+  } else {
+    usernames = await db.getAllUsernames();
+  }
+
   res.render("index", {
     title: "Username List",
     usernames,
@@ -20,8 +27,14 @@ async function newUsernamePost(req, res) {
   res.redirect("/");
 }
 
+async function deleteAllUsernames(req, res) {
+  await db.deleteUsernames();
+  res.redirect("/");
+}
+
 module.exports = {
   getUsernames,
   newUsernameGet,
   newUsernamePost,
+  deleteAllUsernames,
 };

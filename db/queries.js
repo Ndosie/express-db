@@ -5,8 +5,25 @@ async function getAllUsernames(params) {
   return rows;
 }
 
+async function getSearchedNames(term) {
+  const { rows } = await pool.query(
+    "SELECT * FROM usernames WHERE username LIKE $1",
+    [`%${term}%`],
+  );
+  return rows;
+}
+
 async function insertUsername(username) {
   await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 }
 
-module.exports = { getAllUsernames, insertUsername };
+async function deleteUsernames() {
+  await pool.query("DELETE FROM usernames");
+}
+
+module.exports = {
+  getAllUsernames,
+  getSearchedNames,
+  insertUsername,
+  deleteUsernames,
+};
